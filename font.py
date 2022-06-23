@@ -140,5 +140,4 @@ def write_full(string, delay=500):
     )
 
 
-# write(" Alexei, Richard ")
 write_full(" ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+-*/=_,. ")
