@@ -42,15 +42,17 @@ while True:
     for x, y in snake:
         hub.display.pixel(x, y, 9)
 
+    for i in range(5):
+        hub.display.pixel(4, i, 9)
+
     if not apple:
-        if len(snake) < 24:
-            apple = (randint(0, 4), randint(0, 4))
+        if len(snake) < 19:
+            apple = (randint(0, 3), randint(0, 4))
             while apple in snake or apple == sn_pos:
-                apple = (randint(0, 4), randint(0, 4))
+                apple = (randint(0, 3), randint(0, 4))
         else:
-            hub.led("green")
-            while True:
-                pass
+            hub.led((0, 255, 0))
+            break
 
     hub.display.pixel(apple[0], apple[1], 7)
 
@@ -71,14 +73,11 @@ while True:
         sn_pos = (sn_pos[0], sn_pos[1] - 1)
 
     if sn_pos in snake:
-        break
+        raise SystemExit
 
     if sn_pos == apple:
         apple = None
         got_apple = True
 
-    if sn_pos[0] < 0 or sn_pos[0] >= 5 or sn_pos[1] < 0 or sn_pos[1] >= 5:
-        break
-
-hub.display.clear()
-raise SystemExit
+    if sn_pos[0] < 0 or sn_pos[0] >= 4 or sn_pos[1] < 0 or sn_pos[1] >= 5:
+        raise SystemExit
