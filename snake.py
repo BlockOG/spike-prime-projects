@@ -51,7 +51,7 @@ async def on_start(vm, stack):
 
         hub.display.pixel(apple[0], apple[1], 7)
 
-        wait_for_seconds(0.5)
+        await wait_for_seconds(0.5)
 
         snake.append(sn_pos)
         if not got_apple:

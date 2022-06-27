@@ -27,13 +27,13 @@ while True:
     
     arm.run_to_position(45)
 
-    if color == "red":
+    if color == None:
+        break
+    elif color in ("red", "green", "violet"):
         base.run_to_position(180)
-    elif color == "green":
-        base.run_to_position(180)
-    elif color == "blue":
+    elif color in ("blue"):
         base.run_to_position(90)
-    elif color == "yellow":
+    elif color in ("yellow"):
         base.run_to_position(270)
     else:
         break
@@ -41,3 +41,8 @@ while True:
     arm.run_to_position(15)
     claws.run_to_position(0)
     arm.run_to_position(45)
+
+base.set_stop_action(Motor.BRAKE)
+arm.set_stop_action(Motor.BRAKE)
+claws.run_to_position(0)
+arm.run_to_position(15)
