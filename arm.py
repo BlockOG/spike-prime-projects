@@ -1,5 +1,6 @@
 # LEGO type:standard slot:16
 from spike import Motor, ColorSensor
+from spike.control import wait_for_seconds
 
 base = Motor("A")
 arm = Motor("B")
@@ -15,34 +16,37 @@ try:
     arm.set_stop_action(Motor.HOLD)
 
     color_map = {
-        "yellow": 0,
-        "green": 1,
-        "violet": 1,
+        "blue": 1,
         "red": 1,
-        "blue": 2,
+        "yellow": 1,
+        "green": 0,
+        "violet": 0,
     }
 
     while True:
-        claws.run_to_position(0)
         base.run_to_position(0)
-
+        claws.run_to_position(0)
         arm.run_to_position(15)
-        claws.run_to_position(135)
 
         color = sensor.get_color()
+        
+        if color == None or color not in color_map:
+            continue
 
+        claws.run_to_position(135)
         arm.run_to_position(45)
-
-        if color == None:
-            continue
-        elif color in color_map:
-            base.run_to_position(color_map[color] * 90 + 90)
-        else:
-            continue
+        
+        if color_map[color] == 0:
+            base.run_to_position(90)
+            base.run_to_position(90)
+        elif color_map[color] == 1:
+            base.run_to_position(270)
+            base.run_to_position(270)
+        wait_for_seconds(0.5)
 
         arm.run_to_position(15)
         claws.run_to_position(0)
-except KeyboardInterrupt:
+except (KeyboardInterrupt, SystemExit):
     claws.stop()
     base.stop()
     arm.stop()
