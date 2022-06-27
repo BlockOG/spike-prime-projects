@@ -14,6 +14,14 @@ claws.set_default_speed(20)
 base.set_stop_action(Motor.HOLD)
 arm.set_stop_action(Motor.HOLD)
 
+color_map = {
+    "blue": 0,
+    "green": 1,
+    "violet": 1,
+    "red": 1,
+    "yellow": 2,
+}
+
 while True:
     claws.run_to_position(0)
     arm.run_to_position(45)
@@ -29,12 +37,8 @@ while True:
 
     if color == None:
         break
-    elif color in ("red", "green", "violet"):
-        base.run_to_position(180)
-    elif color in ("blue"):
-        base.run_to_position(90)
-    elif color in ("yellow"):
-        base.run_to_position(270)
+    elif color in color_map:
+        base.run_to_position(color_map[color] * 90 + 90)
     else:
         break
 
