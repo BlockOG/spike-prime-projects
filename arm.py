@@ -24,8 +24,6 @@ try:
 
     while True:
         claws.run_to_position(0)
-        arm.run_to_position(45)
-
         base.run_to_position(0)
 
         arm.run_to_position(15)
@@ -44,8 +42,11 @@ try:
 
         arm.run_to_position(15)
         claws.run_to_position(0)
-        arm.run_to_position(45)
 except KeyboardInterrupt:
+    claws.stop()
+    base.stop()
+    arm.stop()
+    
     claws.run_to_position(0)
     base.run_to_position(0)
     arm.run_to_position(15)
