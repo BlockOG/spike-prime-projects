@@ -1,7 +1,6 @@
 # LEGO type:advanced slot:1
 from spike.control import wait_for_seconds
 from runtime.virtualmachine import VirtualMachine
-import hub
 from hub import display
 
 
@@ -12,7 +11,7 @@ grid = [
 ]
 chosen = [0, 0]
 turn = 0
-color_map = [0, 5, 7, 9]
+color_map = [3, 5, 7, 9]
 won = False
 who_won = 0
 
@@ -127,6 +126,8 @@ async def on_left_button_pressed(vm, stack):
 
 
 async def on_start(vm, stack):
+    show_grid()
+    
     display.pixel(chosen[0] + 1, chosen[1] + 1, color_map[3])
     display.pixel(4, 4, color_map[turn + 1])
 
